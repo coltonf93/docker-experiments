@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using todo_api.Data;
+using todo_api.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Add Redis Connection Multiplexer as a singleton
+var redisHost = builder.Configuration["Redis:Host"] ?? "redis";
+var redisPort = builder.Configuration["Redis:Port"] ?? "6379";
+var redisConnection = $"{redisHost}:{redisPort}";
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnection));
+builder.Services.AddSingleton<RedisCacheHelper>();
 builder.Services.AddControllers();
 //builder.Services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("TodoList"));
 builder.Services.AddDbContext<TodoContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
@@ -16,7 +24,8 @@ builder.Services.AddCors(options => {
     {
         policy.WithOrigins("http://localhost:8080") // The frontend URL
         .AllowAnyHeader() 
-        .AllowAnyMethod();
+        .AllowAnyMethod()
+        .WithExposedHeaders("X-Data-Source");
     }); 
 });
 

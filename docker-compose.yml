@@ -34,6 +34,12 @@ services:
       - "8080:80"
     depends_on:
       - api
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports:
+      - "6381:6379"
   
 volumes:
   todo_db_data:

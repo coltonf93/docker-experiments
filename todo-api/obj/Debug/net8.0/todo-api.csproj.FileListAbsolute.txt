@@ -110,3 +110,6 @@ C:\Users\Colton\Documents\git\docker\todo-api\bin\Debug\net8.0\ru\Microsoft.Code
 C:\Users\Colton\Documents\git\docker\todo-api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Colton\Documents\git\docker\todo-api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Colton\Documents\git\docker\todo-api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Colton\Documents\git\docker\todo-api\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\Colton\Documents\git\docker\todo-api\bin\Debug\net8.0\StackExchange.Redis.dll
+C:\Users\Colton\Documents\git\docker\todo-api\obj\Debug\net8.0\todo-api.sourcelink.json

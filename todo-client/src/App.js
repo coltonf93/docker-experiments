@@ -5,6 +5,7 @@ import './App.css';
 function App() {
     const [tasks, setTasks] = useState([]);
     const [showCompleted, setShowCompleted] = useState(false);
+    const [dataSource, setDataSource] = useState ("unknown");
 
     useEffect(() => {
         fetchTasks();
@@ -12,7 +13,11 @@ function App() {
 
     const fetchTasks = () => {
         fetch(`${API_BASE_URL}/tasks`)
-            .then(res => res.json())
+            .then(res => {
+                const dataSource = res.headers.get("X-Data-Source");
+                setDataSource(dataSource);
+                return res.json();
+            })
             .then(data => {
                 setTasks(data.map(t => ({ ...t, isEditing: false })));
             })
@@ -102,8 +107,27 @@ function App() {
         <div className="App">
             <h1>To-Do List</h1>
 
+            <div className="data-source-indicator">
+                Loaded from: {dataSource}
+                <button
+                    className="refresh-btn"
+                    onClick={fetchTasks}
+                    aria-label="Refresh tasks"
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#555',
+                        cursor: 'pointer',
+                        marginLeft: '0.5rem',
+                        fontSize: '0.9rem'
+                    }}
+                >
+                    ↻
+                </button>
+            </div>
+
             {/* Task Form for adding new tasks */}
-            <TaskForm onAddTask={addTask} />
+            <TaskForm onAddTask={addTask}/>
 
             {/* Show toggle only if at least one task exists */}
             {tasks.length > 0 && (
@@ -147,7 +171,7 @@ function App() {
  * TaskForm Component
  * Responsible for handling input for adding new tasks.
  */
-function TaskForm({ onAddTask }) {
+function TaskForm({onAddTask}) {
     const [newTask, setNewTask] = useState('');
 
     const handleSubmit = (e) => {
