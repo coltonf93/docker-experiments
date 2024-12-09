@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=todo_db
+    volumes:
+      - todo_db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  api:
+    build: ./todo-api
+    ports:
+      - "5000:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=server=db;port=3306;database=todo_db;user=root;password=secret
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  frontend:
+    build: ./todo-client
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+  
+volumes:
+  todo_db_data:

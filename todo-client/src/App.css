@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #f6f8fa;
+}
+
+.App {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+.App h1 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.task-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.task-form input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.task-form button {
+  padding: 0.5rem 1rem;
+  background: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.task-form button:hover {
+  background: #218838;
+}
+
+.toggle-completed-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.toggle-completed-label {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.task-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  background: #f2f2f2;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.task-item:hover {
+  background: #eaeaea;
+}
+
+.task-text {
+  flex: 1;
+  margin: 0 0.5rem;
+}
+
+.task-text.editing {
+  background: #fffbe5;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: #777;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+.task-actions button:hover {
+  background: #ddd;
+}
+
+.task-actions .save-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.task-actions .save-btn:hover {
+  background: #218838;
+}
+
+.task-actions .cancel-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+.task-actions .cancel-btn:hover {
+  background: #c82333;
+}
+
+.task-edit-input {
+  width: 100%;
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.separator {
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  color: #555;
+}
